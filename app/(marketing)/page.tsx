@@ -16,7 +16,9 @@ import {
   Wrap,
   useClipboard,
   Grid,
-  useColorMode
+  useColorMode,
+  useColorModeValue,
+  Button
 } from '@chakra-ui/react'
 import { Br, Link } from '@saas-ui/react'
 import type { Metadata, NextPage } from 'next'
@@ -39,7 +41,9 @@ import {
   FiTrendingUp,
   FiUserPlus,
 } from 'react-icons/fi'
-
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
 import * as React from 'react'
 
 import { ButtonLink } from '#components/button-link/button-link'
@@ -60,6 +64,8 @@ import { Em } from '#components/typography'
 import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
+import ClientsSection from '#components/Clients'
+import TeamSection from '#components/Team'
 
 export const meta: Metadata = {
   title: 'Saas UI Landingspage',
@@ -71,15 +77,21 @@ const Home: NextPage = () => {
     <Box>
       <HeroSection />
 
-      <HighlightsSection />
+      {/* <HighlightsSection /> */}
 
       <ServicesSection />
 
+      <AboutSection />
+
       <FeaturesSection />
+
+      <ClientsSection />
 
       <TestimonialsSection />
 
-      <PricingSection />
+      <TeamSection />
+
+      {/* <PricingSection /> */}
 
       <FaqSection />
     </Box>
@@ -208,93 +220,198 @@ const HeroSection: React.FC = () => {
   )
 }
 
+const MotionBox = motion(Box); // Wrap Chakra's Box with motion
+
 const ServicesSection = () => {
   const { colorMode } = useColorMode();
+
+  const services = [
+    {
+      title: 'Web Development',
+      description:
+        'We provide responsive and modern websites, tailored to meet your business needs and user expectations. Our expertise includes popular frameworks and libraries that will make your project stand out.',
+      image: '/static/images/web.jpg',
+      techs: ['React', 'Next.js', 'Vue.js', 'Angular', 'Django', 'Flask', 'NestJs', 'Node.js', 'DotNet', 'GraphQL', 'Express.js'],
+    },
+    {
+      title: 'Artificial Intelligence',
+      description:
+        'Leverage AI to enhance your business operations, from machine learning to natural language processing.',
+      image: '/static/images/ai.png',
+      techs: ['Demand Forecasting', 'Optimization Algorithms', 'Computer Vision', 'LLMs'],
+    },
+    {
+      title: 'Cloud And DevOps',
+      description:
+        'Build scalable, reliable, and efficient cloud infrastructure with DevOps best practices.',
+      image: '/static/images/devops.png',
+      techs: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'GCP'],
+    },
+    {
+      title: 'Mobile Apps',
+      description:
+        'Create intuitive and high-performance mobile applications for iOS and Android platforms.',
+      image: '/static/images/mobile-app.jpg',
+      techs: ['React Native', 'Flutter', 'Android Studio'],
+    },
+  ];
 
   return (
     <Container maxW="container.xl">
       <Box p={4}>
         <Grid
-          templateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(2, 1fr)' }} // One column on smaller screens, two on medium and larger
-          gap={8} // Adjusted gap for better spacing
+          templateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(2, 1fr)' }}
+          gap={8}
         >
-          {[
-            {
-              title: 'Web Development',
-              description:
-                'We provide responsive and modern websites, tailored to meet your business needs and user expectations. Our expertise includes popular frameworks and libraries that will make your project stand out.',
-              image: '/static/images/web.jpg',
-              techs: ['React', 'Next.js', 'Vue.js', 'Angular', 'Django', 'Flask', 'NestJs', 'Node.js', 'DotNet', 'GraphQL', 'Express.js'],
-            },
-            {
-              title: 'Artificial Intelligence',
-              description:
-                'Leverage AI to enhance your business operations, from machine learning to natural language processing.',
-              image: '/static/images/ai.png',
-              techs: ['Demand Forecasting', 'Optimization Algorithms', 'Computer Vision', 'LLMs'],
-            },
-            {
-              title: 'Cloud And DevOps',
-              description:
-                'Build scalable, reliable, and efficient cloud infrastructure with DevOps best practices.',
-              image: '/static/images/devops.png',
-              techs: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'GCP'],
-            },
-            {
-              title: 'Mobile Apps',
-              description:
-                'Create intuitive and high-performance mobile applications for iOS and Android platforms.',
-              image: '/static/images/mobile-app.jpg',
-              techs: ['React Native', 'Flutter', 'Android Studio'],
-            },
-          ].map((service, index) => (
-            <Box
+          {services.map((service, index) => (
+            <AnimatedCard
               key={index}
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-              boxShadow="lg"
-              bg={colorMode === 'dark' ? 'gray.700' : 'white'}
-              w="full"
-            >
-              <Box w="full" h={300} overflow="hidden">
-                <Image
-                  alt={`${service.title} Image`}
-                  src={service.image}
-                  layout="responsive"
-                  width={350}
-                  height={200}
-                  className="rounded-t-lg"
-                />
-              </Box>
-
-              <Box w="full" overflow="hidden" p={8}>
-                <Text fontSize="xl" fontWeight="bold" color={colorMode === 'dark' ? 'white' : 'gray.900'} mb={4}>
-                  {service.title}
-                </Text>
-                <Text color={colorMode === 'dark' ? 'gray.400' : 'muted'} fontSize="lg">
-                  {service.description}
-                </Text>
-                <Wrap mt="8">
-                  {service.techs.map((tech) => (
-                    <Tag
-                      key={tech}
-                      variant="subtle"
-                      colorScheme="cyan"
-                      rounded="full"
-                      px="3"
-                      color={colorMode === 'dark' ? 'white' : 'cyan.800'}
-                    >
-                      {tech}
-                    </Tag>
-                  ))}
-                </Wrap>
-              </Box>
-            </Box>
+              service={service}
+              direction={index % 2 === 0 ? 'left' : 'right'} // Alternate animation directions
+              colorMode={colorMode}
+            />
           ))}
         </Grid>
       </Box>
     </Container>
+  );
+};
+
+// Animated card component
+const AnimatedCard = ({ service, direction, colorMode }) => {
+  const controls = useAnimation();
+  const { ref, inView } = useInView({
+    threshold: 0.2, // Trigger animation when 20% of the card is visible
+  });
+
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+  }, [inView, controls]);
+
+  return (
+    <MotionBox
+      ref={ref}
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      boxShadow="lg"
+      bg={colorMode === 'dark' ? 'gray.700' : 'white'}
+      w="full"
+      initial="hidden"
+      animate={controls}
+      variants={{
+        hidden: { opacity: 0, x: direction === 'left' ? -100 : 100 },
+        visible: { opacity: 1, x: 0 },
+      }}
+      transition={{ duration: 1 }}
+    >
+      <Box w="full" h={300} overflow="hidden">
+        <Image
+          alt={`${service.title} Image`}
+          src={service.image}
+          layout="responsive"
+          width={350}
+          height={200}
+          className="rounded-t-lg"
+        />
+      </Box>
+
+      <Box w="full" overflow="hidden" p={8}>
+        <Text fontSize="xl" fontWeight="bold" color={colorMode === 'dark' ? 'white' : 'gray.900'} mb={4}>
+          {service.title}
+        </Text>
+        <Text color={colorMode === 'dark' ? 'gray.400' : 'muted'} fontSize="lg">
+          {service.description}
+        </Text>
+        <Wrap mt="8">
+          {service.techs.map((tech) => (
+            <Tag
+              key={tech}
+              variant="subtle"
+              colorScheme="cyan"
+              rounded="full"
+              px="3"
+              color={colorMode === 'dark' ? 'white' : 'cyan.800'}
+            >
+              {tech}
+            </Tag>
+          ))}
+        </Wrap>
+      </Box>
+    </MotionBox>
+  );
+};
+
+
+const AboutSection = () => {
+  const bgColor = useColorModeValue('gray.700', 'gray.500'); // Different background colors for light/dark mode
+  const textColor = useColorModeValue('white', 'gray.100'); // Light text color for dark background, dark text for light background
+
+  return (
+    <Box mt={{ base: '20', md: '32' }} py={{ base: '12', md: '24' }}>
+      <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between">
+        {/* Left side - Image */}
+        <Box
+          w={{ base: 'full', lg: '50%' }}
+          h="600px"
+          bgImage="/static/images/about.jpg"
+          bgSize="cover"
+          bgPosition="center"
+        />
+        {/* Right side - Solid Color */}
+        <Box
+          w={{ base: 'full', lg: '50%' }}
+          bg={bgColor}
+          p={{ base: 4, lg: 16 }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems={{ base: 'center', lg: 'flex-start' }}
+        >
+          <MotionBox
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            mb={4}
+          >
+            <Text
+              fontSize="2xl"
+              fontWeight="semibold"
+              textTransform="uppercase"
+              color={useColorModeValue('teal.600', 'green.300')}
+              mb={2}
+            >
+              About Us
+            </Text>
+          </MotionBox>
+          <MotionBox
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.1 }}
+            mb={4}
+          >
+            <Heading size="xl" color={textColor}>
+              Empowering Startups with AI-Driven Solutions for Smarter Decision-Making
+            </Heading>
+          </MotionBox>
+          <MotionBox
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            mb={6}
+          >
+            <Text fontSize="lg" color={textColor} mb={4}>
+              We strive to make decision-making easier for startups by harnessing the power of Artificial Intelligence. Our goal is to simplify complex challenges by using advanced AI technologies to analyze data, uncover patterns, and deliver actionable insights that drive informed business decisions.
+            </Text>
+            <Text fontSize="lg" color={useColorModeValue('teal.600', 'green.300')} mb={6}>
+              “Unlocking the potential of data to drive smarter decisions and foster growth.”
+            </Text>
+          </MotionBox>
+        </Box>
+      </Flex>
+    </Box>
   );
 };
 

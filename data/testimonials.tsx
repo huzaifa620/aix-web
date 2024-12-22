@@ -2,39 +2,33 @@ export default {
   title: 'Loved by tech people',
   items: [
     {
-      name: 'Eelco Wiersma',
-      description: 'Founder Saas UI',
+      name: 'Alex Rainey',
+      description: 'myaskai.com',
       avatar:
-        'https://pbs.twimg.com/profile_images/1470742164024008706/k-eXHtu0_normal.jpg',
+        '/static/images/test1.jpg',
       children: (
         <>
-          “With SaaS UI I am able to produce high quality dashboard apps and
-          internal tools without a lot of design skills. The ROI really is
-          amazing.”
+          “Big thank you to AIgnitiveX for all their support in building out our AI backend. Great team for anyone looking to start making use of OpenAI or Pinecone.”
         </>
       ),
     },
     {
-      name: 'Caroline Yahaya',
-      description: 'Fullstack Developer',
-      avatar: '/static/images/avatar2.jpg',
+      name: 'Rehani Soko',
+      description: 'rehanisoko.com',
+      avatar: '/static/images/test2.jpg',
       children: (
         <>
-          “Saas UI allows me to build beautiful and functional UI super fast.
-          The components are very well thought out and the Next.js starter kit
-          saved me at least 100 hours of work.”
+          “I am delighted to share that Rehani Soko has collaborated with AIgnitiveX, a remarkable startup, to provide us with comprehensive technical assistance. Together, we have successfully implemented a data pipeline, helping revolutionize our operations.”
         </>
       ),
     },
     {
-      name: 'Alberto Vazquez',
-      description: 'Frontend Engineer',
-      avatar: '/static/images/avatar3.jpg',
+      name: 'Omar Cholico',
+      description: 'monarcajewels.com',
+      avatar: '/static/images/test3.jpg',
       children: (
         <>
-          “Saas UI gave us a perfect starting point for our project, having the
-          storybooks already set up with beautifully crafted components and
-          fully mocked pages was a treat.”
+          “Thank you so much guys for your hard work, this is just the beginning!”
         </>
       ),
     },
