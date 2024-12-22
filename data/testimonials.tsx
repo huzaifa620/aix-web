@@ -1,5 +1,5 @@
 export default {
-  title: 'Loved by tech people',
+  title: 'Testimonial',
   items: [
     {
       name: 'Alex Rainey',

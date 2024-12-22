@@ -61,8 +61,8 @@ const teamMembers: TeamMember[] = [
   },
   {
     image: '/static/images/team1.png',
-    name: 'Full Stack Developer',
-    role: 'Software Engineer',
+    name: 'Muhammad Areeb',
+    role: 'Full Stack Developer',
     socialLinks: {
       facebook: '#',
       twitter: '#',
@@ -75,7 +75,7 @@ const teamMembers: TeamMember[] = [
 const TeamSection = () => {
   return (
     <Box position="relative" overflow="hidden">
-      <Container maxW="container.xl" pt={{ base: 40, lg: 60 }} pb="40">
+      <Container maxW="container.xl" pt={{ base: 12, lg: 20 }} pb="20">
         <MotionBox
           p={8}
           initial={{ opacity: 0 }}
@@ -96,13 +96,23 @@ const TeamSection = () => {
           </Text>
           <Flex wrap="wrap" justify="center" gap={6}>
             {teamMembers.map((member, index) => (
-              <Flex wrap="wrap" justify="center" gap={6} flexDirection="column">
+              <Box
+                key={index}
+                w={{ base: '100%', sm: '45%', md: '22%' }}
+                mb={8} // Adds spacing between the rows
+                textAlign="center"
+                position="relative"
+                boxShadow="md"
+                borderRadius="md"
+                overflow="hidden"
+                _hover={{ boxShadow: 'lg' }}
+              >
                 <Image
                   src={member.image}
                   alt={`${member.name}'s photo`}
                   objectFit="cover"
-                  w={255}
-                  h={290}
+                  w="100%"
+                  h={250}
                   transition="all 0.3s ease-in-out"
                   _hover={{ opacity: 0.8 }}
                 />
@@ -165,13 +175,13 @@ const TeamSection = () => {
                 </Box>
 
                 {/* Static Content below image */}
-                <Box w={255} p={4} textAlign="center" bg="white">
-                  <Text w={255} fontSize="xl" fontWeight="bold">
+                <Box p={4}>
+                  <Text fontSize="xl" fontWeight="bold">
                     {member.name}
                   </Text>
-                  <Text w={255}>{member.role}</Text>
+                  <Text>{member.role}</Text>
                 </Box>
-              </Flex>
+              </Box>
             ))}
           </Flex>
         </MotionBox>
