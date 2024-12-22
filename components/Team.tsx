@@ -7,9 +7,10 @@ import {
   Image,
   Text,
   useBreakpointValue,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiFacebook, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
+import { FiGithub, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
 
 const MotionBox = motion(Box)
 
@@ -18,10 +19,9 @@ interface TeamMember {
   name: string
   role: string
   socialLinks: {
-    facebook: string
-    twitter: string
-    instagram: string
     linkedin: string
+    github: string
+    portfolio: string // Personal portfolio
   }
 }
 
@@ -31,10 +31,9 @@ const teamMembers: TeamMember[] = [
     name: 'Owais Ahmed',
     role: 'Machine Learning Engineer | Computer Vision Engineer',
     socialLinks: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
       linkedin: '#',
+      github: '#',
+      portfolio: '#',
     },
   },
   {
@@ -42,10 +41,9 @@ const teamMembers: TeamMember[] = [
     name: 'Hamza Ali',
     role: 'Machine Learning Engineer | Full Stack Developer',
     socialLinks: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
       linkedin: '#',
+      github: '#',
+      portfolio: '#',
     },
   },
   {
@@ -53,10 +51,9 @@ const teamMembers: TeamMember[] = [
     name: 'Muhammad Huzaifa',
     role: 'MERN Stack Developer | Python Developer',
     socialLinks: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
       linkedin: '#',
+      github: '#',
+      portfolio: '#',
     },
   },
   {
@@ -64,15 +61,17 @@ const teamMembers: TeamMember[] = [
     name: 'Muhammad Areeb',
     role: 'Full Stack Developer',
     socialLinks: {
-      facebook: '#',
-      twitter: '#',
-      instagram: '#',
       linkedin: '#',
+      github: '#',
+      portfolio: '#',
     },
   },
 ]
 
 const TeamSection = () => {
+  // Use theme-aware colors for icon visibility
+  const iconColor = useColorModeValue('gray.800', 'white') // Light mode: dark icons, dark mode: white icons
+
   return (
     <Box position="relative" overflow="hidden">
       <Container maxW="container.xl" pt={{ base: 12, lg: 20 }} pb="20">
@@ -105,7 +104,11 @@ const TeamSection = () => {
                 boxShadow="md"
                 borderRadius="md"
                 overflow="hidden"
-                _hover={{ boxShadow: 'lg' }}
+                _hover={{
+                  boxShadow: 'lg', // More prominent shadow on hover
+                  transform: 'scale(1.05)', // Slightly zoom the card on hover for better visual effect
+                }}
+                transition="all 0.3s ease-in-out"
               >
                 <Image
                   src={member.image}
@@ -127,39 +130,30 @@ const TeamSection = () => {
                   <Flex mb={2} wrap="wrap" justify="center" gap={6}>
                     <IconButton
                       as="a"
-                      href={member.socialLinks.facebook}
-                      target="_blank"
-                      aria-label="Facebook"
-                      icon={<FiFacebook />}
-                      variant="ghost"
-                      color="white"
-                    />
-                    <IconButton
-                      as="a"
-                      href={member.socialLinks.twitter}
-                      target="_blank"
-                      aria-label="Twitter"
-                      icon={<FiTwitter />}
-                      variant="ghost"
-                      color="white"
-                    />
-                    <IconButton
-                      as="a"
-                      href={member.socialLinks.instagram}
-                      target="_blank"
-                      aria-label="Instagram"
-                      icon={<FiInstagram />}
-                      variant="ghost"
-                      color="white"
-                    />
-                    <IconButton
-                      as="a"
                       href={member.socialLinks.linkedin}
                       target="_blank"
                       aria-label="LinkedIn"
                       icon={<FiLinkedin />}
                       variant="ghost"
-                      color="white"
+                      color={iconColor}
+                    />
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.github}
+                      target="_blank"
+                      aria-label="GitHub"
+                      icon={<FiGithub />}
+                      variant="ghost"
+                      color={iconColor}
+                    />
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.portfolio}
+                      target="_blank"
+                      aria-label="Portfolio"
+                      icon={<FiGithub />} // Replace with an appropriate icon for personal portfolio
+                      variant="ghost"
+                      color={iconColor}
                     />
                   </Flex>
                 </Box>
