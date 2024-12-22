@@ -116,70 +116,52 @@ const TeamSection = () => {
                   transition="all 0.3s ease-in-out"
                   _hover={{ opacity: 0.8 }}
                 />
-                {/* Social Icons */}
-                <Box
-                  position="absolute"
-                  bottom={0}
-                  left="50%"
-                  transform="translateX(-50%)"
-                  zIndex={2}
-                  color="white"
-                  display="flex"
-                  gap={4}
-                  pb={4}
-                  opacity={0} // Start hidden
-                  transition="opacity 0.3s ease-in-out"
-                  _groupHover={{
-                    opacity: 1,
-                    transform: 'translateY(-20px)',
-                    transition:
-                      'transform 0.3s ease-in-out, opacity 0.3s ease-in-out',
-                  }}
-                >
-                  <IconButton
-                    as="a"
-                    href={member.socialLinks.facebook}
-                    target="_blank"
-                    aria-label="Facebook"
-                    icon={<FiFacebook />}
-                    variant="ghost"
-                    color="white"
-                  />
-                  <IconButton
-                    as="a"
-                    href={member.socialLinks.twitter}
-                    target="_blank"
-                    aria-label="Twitter"
-                    icon={<FiTwitter />}
-                    variant="ghost"
-                    color="white"
-                  />
-                  <IconButton
-                    as="a"
-                    href={member.socialLinks.instagram}
-                    target="_blank"
-                    aria-label="Instagram"
-                    icon={<FiInstagram />}
-                    variant="ghost"
-                    color="white"
-                  />
-                  <IconButton
-                    as="a"
-                    href={member.socialLinks.linkedin}
-                    target="_blank"
-                    aria-label="LinkedIn"
-                    icon={<FiLinkedin />}
-                    variant="ghost"
-                    color="white"
-                  />
-                </Box>
 
-                {/* Static Content below image */}
                 <Box p={4}>
-                  <Text fontSize="xl" fontWeight="bold">
+                  <Text mb={2} fontSize="xl" fontWeight="bold">
                     {member.name}
                   </Text>
-                  <Text>{member.role}</Text>
+                  <Text mb={2} fontSize="sm">
+                    {member.role}
+                  </Text>
+                  <Flex mb={2} wrap="wrap" justify="center" gap={6}>
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.facebook}
+                      target="_blank"
+                      aria-label="Facebook"
+                      icon={<FiFacebook />}
+                      variant="ghost"
+                      color="white"
+                    />
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.twitter}
+                      target="_blank"
+                      aria-label="Twitter"
+                      icon={<FiTwitter />}
+                      variant="ghost"
+                      color="white"
+                    />
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.instagram}
+                      target="_blank"
+                      aria-label="Instagram"
+                      icon={<FiInstagram />}
+                      variant="ghost"
+                      color="white"
+                    />
+                    <IconButton
+                      as="a"
+                      href={member.socialLinks.linkedin}
+                      target="_blank"
+                      aria-label="LinkedIn"
+                      icon={<FiLinkedin />}
+                      variant="ghost"
+                      color="white"
+                    />
+                  </Flex>
                 </Box>
               </Box>
             ))}
