@@ -69,8 +69,9 @@ const teamMembers: TeamMember[] = [
 ]
 
 const TeamSection = () => {
-  // Use theme-aware colors for icon visibility
+  // Use theme-aware colors for icon visibility and border color
   const iconColor = useColorModeValue('gray.800', 'white') // Light mode: dark icons, dark mode: white icons
+  const borderColor = useColorModeValue('gray.300', 'gray.600') // Dark mode: gray.300, Light mode: gray.600
 
   return (
     <Box position="relative" overflow="hidden">
@@ -103,6 +104,8 @@ const TeamSection = () => {
                 position="relative"
                 boxShadow="md"
                 borderRadius="md"
+                borderWidth={1} // Border width
+                borderColor={borderColor} // Border color based on theme
                 overflow="hidden"
                 _hover={{
                   boxShadow: 'lg', // More prominent shadow on hover
@@ -120,7 +123,7 @@ const TeamSection = () => {
                   _hover={{ opacity: 0.8 }}
                 />
 
-                <Box p={4}>
+                <Box p={4}> 
                   <Text mb={2} fontSize="xl" fontWeight="bold">
                     {member.name}
                   </Text>
