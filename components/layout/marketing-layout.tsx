@@ -29,7 +29,7 @@ export const MarketingLayout: React.FC<LayoutProps> = (props) => {
         <SkipNavContent />
         {children}
       </Box>
-      <Footer {...footerProps} />
+      {/* <Footer {...footerProps} /> */}
     </Box>
   )
 }

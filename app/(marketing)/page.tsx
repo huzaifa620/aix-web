@@ -70,7 +70,7 @@ import ContactUsSection from '#components/ContactUs'
 import Footer from '#components/Footer'
 
 export const meta: Metadata = {
-  title: 'Saas UI Landingspage',
+  title: 'AIgnitiveX',
   description: 'Free SaaS landingspage starter kit',
 }
 
