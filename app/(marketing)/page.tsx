@@ -66,6 +66,8 @@ import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
 import ClientsSection from '#components/Clients'
 import TeamSection from '#components/Team'
+import ContactUsSection from '#components/ContactUs'
+import Footer from '#components/Footer'
 
 export const meta: Metadata = {
   title: 'Saas UI Landingspage',
@@ -91,9 +93,13 @@ const Home: NextPage = () => {
 
       <TeamSection />
 
+      <ContactUsSection />
+
+      <Footer />
+
       {/* <PricingSection /> */}
 
-      <FaqSection />
+      {/* <FaqSection /> */}
     </Box>
   )
 }

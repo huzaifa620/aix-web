@@ -9,7 +9,7 @@ export const Logo: React.FC = (props) => {
       pb={1}
       mt={-2}
       borderRadius="md"
-      bg={useColorModeValue('transparent', 'rgba(255, 255, 255, 0.68)')}
+      bg={useColorModeValue('rgba(255, 255, 255, 0.68)', 'rgba(255, 255, 255, 0.68)')}
       backdropFilter="blur(5px)"
     >
       <chakra.img

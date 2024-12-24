@@ -124,7 +124,19 @@ const ClientsSection = () => {
                     bgSize="cover"
                     bgPosition="center"
                     zIndex={0}
-                    opacity={0.4}
+                    opacity={1}
+                    filter="blur(2px)" 
+                    transition="all 0.3s ease-in-out"
+                  ></Box>
+
+                  <Box
+                    position="absolute"
+                    top="0"
+                    left="0"
+                    right="0"
+                    bottom="0"
+                    bg="rgba(0, 0, 0, 0.5)"  // Black with 40% opacity for the overlay
+                    zIndex={1}
                     transition="all 0.3s ease-in-out"
                   ></Box>
   
@@ -133,7 +145,7 @@ const ClientsSection = () => {
                     top="50%"
                     left="50%"
                     transform="translate(-50%, -50%)"
-                    color={useColorModeValue('black', 'white')}
+                    color={useColorModeValue('white', 'white')}
                     zIndex={1}
                     textAlign="center"
                     p={4}
@@ -155,6 +167,10 @@ const ClientsSection = () => {
                         href={client.website}
                         mt={-20}
                         variant="outline"
+                        _hover={{
+                          color: 'white', // Ensure text color is white on hover
+                          borderColor: 'gray.300', // Match border color with background on hover
+                        }}
                         rightIcon={
                             <Icon
                                 as={FiArrowRight}

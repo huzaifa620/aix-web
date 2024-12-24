@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { FiGithub, FiInstagram, FiLinkedin, FiTwitter } from 'react-icons/fi'
+import { FiGithub, FiUser, FiLinkedin } from 'react-icons/fi'
 
 const MotionBox = motion(Box)
 
@@ -37,7 +37,7 @@ const teamMembers: TeamMember[] = [
     },
   },
   {
-    image: '/static/images/team1.png',
+    image: '/static/images/team2.png',
     name: 'Hamza Ali',
     role: 'Machine Learning Engineer | Full Stack Developer',
     socialLinks: {
@@ -47,19 +47,19 @@ const teamMembers: TeamMember[] = [
     },
   },
   {
-    image: '/static/images/team1.png',
+    image: '/static/images/team3.png',
     name: 'Muhammad Huzaifa',
-    role: 'MERN Stack Developer | Python Developer',
+    role: 'Full Stack Developer | Python Developer',
     socialLinks: {
-      linkedin: '#',
-      github: '#',
-      portfolio: '#',
+      linkedin: 'https://www.linkedin.com/in/muhammad-huzaifa-2a3821249',
+      github: 'https://github.com/huzaifa620',
+      portfolio: 'https://personal-portfolio-eta-three.vercel.app',
     },
   },
   {
-    image: '/static/images/team1.png',
+    image: '/static/images/team4.png',
     name: 'Muhammad Areeb',
-    role: 'Full Stack Developer',
+    role: 'Full Stack Developer | Python Developer',
     socialLinks: {
       linkedin: '#',
       github: '#',
@@ -91,8 +91,7 @@ const TeamSection = () => {
             Our Creative Team
           </Heading>
           <Text fontSize="lg" textAlign="center" mb={12}>
-            Tour function information without cross action media value quickly
-            maximize timely deliverables.
+            Our team combines expertise, creativity, and a shared vision to deliver outstanding solutions that drive results.
           </Text>
           <Flex wrap="wrap" justify="center" gap={6}>
             {teamMembers.map((member, index) => (
@@ -154,7 +153,7 @@ const TeamSection = () => {
                       href={member.socialLinks.portfolio}
                       target="_blank"
                       aria-label="Portfolio"
-                      icon={<FiGithub />} // Replace with an appropriate icon for personal portfolio
+                      icon={<FiUser  />} // Replace with an appropriate icon for personal portfolio
                       variant="ghost"
                       color={iconColor}
                     />
