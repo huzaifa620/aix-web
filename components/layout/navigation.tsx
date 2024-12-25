@@ -31,7 +31,11 @@ const Navigation: React.FC = () => {
     mobileNavBtnRef.current?.focus()
   }, [mobileNav.isOpen])
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id?: string, href?: string) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLElement>,
+    id?: string,
+    href?: string,
+  ) => {
     e.preventDefault()
 
     if (id) {

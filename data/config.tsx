@@ -8,8 +8,8 @@ import { Logo } from './logo'
 const siteConfig = {
   logo: Logo,
   seo: {
-    title: 'Saas UI',
-    description: 'The React component library for startups',
+    title: 'AIgnitiveX',
+    description: 'Where Artificial Intelligence meets human ingenuity.',
   } as NextSeoProps,
   termsUrl: '#',
   privacyUrl: '#',
@@ -18,26 +18,32 @@ const siteConfig = {
       {
         id: 'services',
         label: 'Services',
+        href: '',
       },
       {
         id: 'about',
         label: 'About',
+        href: '',
       },
       {
         id: 'clients',
         label: 'Clients',
+        href: '',
       },
       {
         id: 'team',
         label: 'Team',
+        href: '',
       },
       {
         id: 'testimonial',
         label: 'Testimonial',
+        href: '',
       },
       {
         id: 'contact',
         label: 'Contact',
+        href: '',
       },
       // {
       //   label: 'Sign Up',
