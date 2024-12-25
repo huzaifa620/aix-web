@@ -39,7 +39,7 @@ const ContactUsSection = () => {
   }
 
   return (
-    <Box py={{ base: 12, lg: 20 }} bg={bgColor}>
+    <Box id="contact" py={{ base: 12, lg: 20 }} bg={bgColor}>
       <Container maxW="container.xl" px={{ base: 4, md: 8 }} textAlign="center">
         <Heading
           lineHeight="short"
@@ -87,7 +87,7 @@ const ContactUsSection = () => {
               name="email"
               type="email"
               placeholder="Enter your email"
-              defaultValue="aignitivex@gmail.com"
+              defaultValue=""
               fontSize={{ base: 'sm', md: 'md' }}
               focusBorderColor={inputFocusColor}
             />

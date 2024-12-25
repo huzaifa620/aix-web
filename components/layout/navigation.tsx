@@ -31,6 +31,26 @@ const Navigation: React.FC = () => {
     mobileNavBtnRef.current?.focus()
   }, [mobileNav.isOpen])
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id?: string, href?: string) => {
+    e.preventDefault()
+
+    if (id) {
+      const targetElement = document.getElementById(id)
+      if (targetElement) {
+        const headerOffset = 80 // Adjust based on your header's height
+        const elementPosition = targetElement.offsetTop
+        const offsetPosition = elementPosition - headerOffset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        })
+      }
+    } else if (href) {
+      router.push(href)
+    }
+  }
+
   return (
     <HStack spacing="2" flexShrink={0}>
       {siteConfig.header.links.map(({ href, id, ...props }, i) => {
@@ -45,6 +65,7 @@ const Navigation: React.FC = () => {
                 (href && !!path?.match(new RegExp(href)))
               )
             }
+            onClick={(e) => handleSmoothScroll(e, id, href)}
             {...props}
           >
             {props.label}

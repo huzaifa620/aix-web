@@ -24,6 +24,10 @@ const siteConfig = {
         label: 'About',
       },
       {
+        id: 'clients',
+        label: 'Clients',
+      },
+      {
         id: 'team',
         label: 'Team',
       },

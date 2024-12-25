@@ -74,7 +74,7 @@ const TeamSection = () => {
   const borderColor = useColorModeValue('gray.300', 'gray.600') // Dark mode: gray.300, Light mode: gray.600
 
   return (
-    <Box position="relative" overflow="hidden">
+    <Box id="team" position="relative" overflow="hidden">
       <Container maxW="container.xl" pt={{ base: 12, lg: 20 }} pb="20">
         <MotionBox
           p={8}

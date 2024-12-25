@@ -263,7 +263,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <Container maxW="container.xl">
+    <Container id="services" maxW="container.xl">
       <Box p={4}>
         <Grid
           templateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(2, 1fr)' }}
@@ -356,7 +356,7 @@ const AboutSection = () => {
   const textColor = useColorModeValue('white', 'gray.100'); // Light text color for dark background, dark text for light background
 
   return (
-    <Box mt={{ base: '20', md: '32' }} py={{ base: '12', md: '24' }}>
+    <Box id="about" mt={{ base: '20', md: '32' }} py={{ base: '12', md: '24' }}>
       <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between">
         {/* Left side - Image */}
         <Box
@@ -641,6 +641,7 @@ const TestimonialsSection = () => {
 
   return (
     <Testimonials
+      id="testimonial"
       title={testimonials.title}
       columns={[1, 2, 3]}
       innerWidth="container.xl"

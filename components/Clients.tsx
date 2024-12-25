@@ -88,7 +88,7 @@ const ClientsSection = () => {
     }
   
     return (
-      <Box position="relative" overflow="hidden">
+      <Box id="clients" position="relative" overflow="hidden">
         <BackgroundGradient height="100%" zIndex="-1" />
         <Container maxW="container.xl" pt={{ base: 12, lg: 20 }} pb="20">
           <MotionBox
