@@ -2,9 +2,11 @@
 
 import {
   Box,
+  Button,
   ButtonGroup,
   Container,
   Flex,
+  Grid,
   HStack,
   Heading,
   Icon,
@@ -15,14 +17,14 @@ import {
   VStack,
   Wrap,
   useClipboard,
-  Grid,
   useColorMode,
   useColorModeValue,
-  Button
 } from '@chakra-ui/react'
 import { Br, Link } from '@saas-ui/react'
+import { motion, useAnimation } from 'framer-motion'
 import type { Metadata, NextPage } from 'next'
 import Image from 'next/image'
+import router from 'next/router'
 import {
   FiArrowRight,
   FiBox,
@@ -41,11 +43,15 @@ import {
   FiTrendingUp,
   FiUserPlus,
 } from 'react-icons/fi'
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
-import * as React from 'react'
+import { useInView } from 'react-intersection-observer'
 
+import * as React from 'react'
+import { useEffect } from 'react'
+
+import ClientsSection from '#components/Clients'
+import ContactUsSection from '#components/ContactUs'
+import Footer from '#components/Footer'
+import TeamSection from '#components/Team'
 import { ButtonLink } from '#components/button-link/button-link'
 import { Faq } from '#components/faq'
 import { Features } from '#components/features'
@@ -64,15 +70,35 @@ import { Em } from '#components/typography'
 import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
-import ClientsSection from '#components/Clients'
-import TeamSection from '#components/Team'
-import ContactUsSection from '#components/ContactUs'
-import Footer from '#components/Footer'
 
 // export const meta: Metadata = {
 //   title: 'AIgnitiveX',
 //   description: 'Where Artificial Intelligence meets human ingenuity',
 // }
+
+const handleSmoothScroll = (
+  e: React.MouseEvent<HTMLElement>,
+  id?: string,
+  href?: string,
+) => {
+  e.preventDefault()
+
+  if (id) {
+    const targetElement = document.getElementById(id)
+    if (targetElement) {
+      const headerOffset = 80 // Adjust based on your header's height
+      const elementPosition = targetElement.offsetTop
+      const offsetPosition = elementPosition - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      })
+    }
+  } else if (href) {
+    router.push(href)
+  }
+}
 
 const Home: NextPage = () => {
   return (
@@ -117,12 +143,13 @@ const HeroSection: React.FC = () => {
             title={
               <FallInPlace>
                 Where AI meets
-                <Br />  HUMAN ingenuity
+                <Br /> HUMAN ingenuity
               </FallInPlace>
             }
             description={
               <FallInPlace delay={0.4} fontWeight="medium">
-                An <Em>innovative startup</Em> that offers technical assistance to startups by harnessing the power of AI
+                An <Em>innovative startup</Em> that offers technical assistance
+                to startups by harnessing the power of AI
               </FallInPlace>
             }
           >
@@ -132,9 +159,13 @@ const HeroSection: React.FC = () => {
               </HStack> */}
 
               <ButtonGroup pt="8" spacing={4} alignItems="center">
-                <ButtonLink colorScheme="teal" size="lg" href="/signup">
+                <Button
+                  colorScheme="teal"
+                  size="lg"
+                  onClick={(e) => handleSmoothScroll(e, 'clients')}
+                >
                   Visit Our Works
-                </ButtonLink>
+                </Button>
                 {/* <ButtonLink
                   size="lg"
                   href="https://demo.saas-ui.dev"
@@ -226,10 +257,10 @@ const HeroSection: React.FC = () => {
   )
 }
 
-const MotionBox = motion(Box); // Wrap Chakra's Box with motion
+const MotionBox = motion(Box) // Wrap Chakra's Box with motion
 
 const ServicesSection = () => {
-  const { colorMode } = useColorMode();
+  const { colorMode } = useColorMode()
 
   const services = [
     {
@@ -237,21 +268,46 @@ const ServicesSection = () => {
       description:
         'We provide responsive and modern websites, tailored to meet your business needs and user expectations. Our expertise includes popular frameworks and libraries that will make your project stand out.',
       image: '/static/images/web.jpg',
-      techs: ['React', 'Next.js', 'Vue.js', 'Angular', 'Django', 'Flask', 'NestJs', 'Node.js', 'DotNet', 'GraphQL', 'Express.js'],
+      techs: [
+        'React',
+        'Next.js',
+        'Vue.js',
+        'Angular',
+        'Django',
+        'Flask',
+        'NestJs',
+        'Node.js',
+        'DotNet',
+        'GraphQL',
+        'Express.js',
+      ],
     },
     {
       title: 'Artificial Intelligence',
       description:
         'Leverage AI to enhance your business operations, from machine learning to natural language processing.',
       image: '/static/images/ai.png',
-      techs: ['Demand Forecasting', 'Optimization Algorithms', 'Computer Vision', 'LLMs'],
+      techs: [
+        'Demand Forecasting',
+        'Optimization Algorithms',
+        'Computer Vision',
+        'LLMs',
+      ],
     },
     {
       title: 'Cloud And DevOps',
       description:
         'Build scalable, reliable, and efficient cloud infrastructure with DevOps best practices.',
       image: '/static/images/devops.png',
-      techs: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD', 'GCP'],
+      techs: [
+        'AWS',
+        'Azure',
+        'Docker',
+        'Kubernetes',
+        'Terraform',
+        'CI/CD',
+        'GCP',
+      ],
     },
     {
       title: 'Mobile Apps',
@@ -260,13 +316,18 @@ const ServicesSection = () => {
       image: '/static/images/mobile-app.jpg',
       techs: ['React Native', 'Flutter', 'Android Studio'],
     },
-  ];
+  ]
 
   return (
     <Container id="services" maxW="container.xl">
       <Box p={4}>
         <Grid
-          templateColumns={{ base: '1fr', sm: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(2, 1fr)' }}
+          templateColumns={{
+            base: '1fr',
+            sm: '1fr',
+            md: 'repeat(2, 1fr)',
+            lg: 'repeat(2, 1fr)',
+          }}
           gap={8}
         >
           {services.map((service, index) => (
@@ -280,21 +341,21 @@ const ServicesSection = () => {
         </Grid>
       </Box>
     </Container>
-  );
-};
+  )
+}
 
 // Animated card component
 const AnimatedCard = ({ service, direction, colorMode }) => {
-  const controls = useAnimation();
+  const controls = useAnimation()
   const { ref, inView } = useInView({
     threshold: 0.2, // Trigger animation when 20% of the card is visible
-  });
+  })
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start('visible')
     }
-  }, [inView, controls]);
+  }, [inView, controls])
 
   return (
     <MotionBox
@@ -325,7 +386,12 @@ const AnimatedCard = ({ service, direction, colorMode }) => {
       </Box>
 
       <Box w="full" overflow="hidden" p={8}>
-        <Text fontSize="xl" fontWeight="bold" color={colorMode === 'dark' ? 'white' : 'gray.900'} mb={4}>
+        <Text
+          fontSize="xl"
+          fontWeight="bold"
+          color={colorMode === 'dark' ? 'white' : 'gray.900'}
+          mb={4}
+        >
           {service.title}
         </Text>
         <Text color={colorMode === 'dark' ? 'gray.400' : 'muted'} fontSize="lg">
@@ -347,13 +413,12 @@ const AnimatedCard = ({ service, direction, colorMode }) => {
         </Wrap>
       </Box>
     </MotionBox>
-  );
-};
-
+  )
+}
 
 const AboutSection = () => {
-  const bgColor = useColorModeValue('gray.700', 'gray.500'); // Different background colors for light/dark mode
-  const textColor = useColorModeValue('white', 'gray.100'); // Light text color for dark background, dark text for light background
+  const bgColor = useColorModeValue('gray.700', 'gray.500') // Different background colors for light/dark mode
+  const textColor = useColorModeValue('white', 'gray.100') // Light text color for dark background, dark text for light background
 
   return (
     <Box id="about" mt={{ base: '20', md: '32' }} py={{ base: '12', md: '24' }}>
@@ -399,7 +464,8 @@ const AboutSection = () => {
             mb={4}
           >
             <Heading size="xl" color={textColor}>
-              Empowering Startups with AI-Driven Solutions for Smarter Decision-Making
+              Empowering Startups with AI-Driven Solutions for Smarter
+              Decision-Making
             </Heading>
           </MotionBox>
           <MotionBox
@@ -409,17 +475,26 @@ const AboutSection = () => {
             mb={6}
           >
             <Text fontSize="lg" color={textColor} mb={4}>
-              We strive to make decision-making easier for startups by harnessing the power of Artificial Intelligence. Our goal is to simplify complex challenges by using advanced AI technologies to analyze data, uncover patterns, and deliver actionable insights that drive informed business decisions.
+              We strive to make decision-making easier for startups by
+              harnessing the power of Artificial Intelligence. Our goal is to
+              simplify complex challenges by using advanced AI technologies to
+              analyze data, uncover patterns, and deliver actionable insights
+              that drive informed business decisions.
             </Text>
-            <Text fontSize="lg" color={useColorModeValue('teal.600', 'green.300')} mb={6}>
-              “Unlocking the potential of data to drive smarter decisions and foster growth.”
+            <Text
+              fontSize="lg"
+              color={useColorModeValue('teal.600', 'green.300')}
+              mb={6}
+            >
+              “Unlocking the potential of data to drive smarter decisions and
+              foster growth.”
             </Text>
           </MotionBox>
         </Box>
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
 const HighlightsSection = () => {
   const { value, onCopy, hasCopied } = useClipboard('yarn add @saas-ui/react')
