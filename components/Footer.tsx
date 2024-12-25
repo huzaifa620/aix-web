@@ -44,7 +44,7 @@ const Footer = () => {
   const primaryText = useColorModeValue('white', 'white')
 
   return (
-    <Box bg="teal.700" color="white" py={{ base: 8, md: 12 }}>
+    <Box bg="teal.700" color="white" py={{ base: 12, md: 32 }}>
       <Container maxW="container.xl">
         <Flex
           direction={{ base: 'column', lg: 'row' }}
@@ -74,27 +74,6 @@ const Footer = () => {
                 </Link>
               </Text>
             </Box>
-
-            {/* <Box
-              bg="tertiary_bg"
-              border="1px dashed"
-              borderColor="ft_border_color"
-              p={8}
-              borderRadius="xl"
-            >
-              <Text fontSize="xl" fontWeight="medium" color={primaryText}>
-                Ready to plan your product development?
-              </Text>
-              <Text mt={2} fontSize="sm" color={textColor}>
-                Get started with your product roadmap.{' '}
-                <Link
-                  href="https://app.startupbuilder.co/company/auth/registration"
-                  color="blue.400"
-                >
-                  Click to signup
-                </Link>
-              </Text>
-            </Box> */}
           </VStack>
 
           {/* Right Section */}
@@ -106,7 +85,7 @@ const Footer = () => {
             px={{ base: 4, lg: 0 }}
           >
             {/* Column 1 */}
-            <VStack align="flex-start">
+            <VStack align="flex-start" gap={4}>
               <Text fontSize="lg" fontWeight="medium" color={primaryText}>
                 Quick Links
               </Text>
@@ -199,52 +178,32 @@ const Footer = () => {
         <Divider mt={10} borderColor={borderColor} />
 
         <Flex
-          mt={5}
+          mt={{ base: '10', lg: '10' }}
+          ml={{ base: '0', lg: '16' }}
           direction={{ base: 'column', lg: 'row' }}
-          gap={4}
+          gap={8}
           align="center"
           justify="space-between"
         >
-          <HStack  spacing={4}>
-            <Logo
-              onClick={(e) => {
-                if (window.location.pathname === '/') {
-                  e.preventDefault()
+          <HStack spacing={4}>
+            <Box transform={{ base: "scale(1.5)", lg: "scale(2)" }}>
+              <Logo
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    e.preventDefault()
 
-                  window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth',
-                  })
-                }
-              }}
-            />
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth',
+                    })
+                  }
+                }}
+              />
+            </Box>
           </HStack>
           <Text fontSize="sm" opacity={0.7}>
             © AIgnitiveX™, {new Date().getFullYear()}. All rights reserved.
           </Text>
-          {/* <HStack spacing={4} mt={{ base: 4, lg: 0 }}>
-            <Link
-              fontSize="sm"
-              color={textColor}
-              _hover={{ color: 'white' }}
-            >
-              FAQ
-            </Link>
-            <Link
-              fontSize="sm"
-              color={textColor}
-              _hover={{ color: 'white' }}
-            >
-              Terms of Use
-            </Link>
-            <Link
-              fontSize="sm"
-              color={textColor}
-              _hover={{ color: 'white' }}
-            >
-              Privacy
-            </Link>
-          </HStack> */}
         </Flex>
       </Container>
     </Box>
