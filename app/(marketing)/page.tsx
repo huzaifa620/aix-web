@@ -71,7 +71,7 @@ import Footer from '#components/Footer'
 
 export const meta: Metadata = {
   title: 'AIgnitiveX',
-  description: 'Free SaaS landingspage starter kit',
+  description: 'Where Artificial Intelligence meets human ingenuity',
 }
 
 const Home: NextPage = () => {
