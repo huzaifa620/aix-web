@@ -69,10 +69,10 @@ import TeamSection from '#components/Team'
 import ContactUsSection from '#components/ContactUs'
 import Footer from '#components/Footer'
 
-export const meta: Metadata = {
-  title: 'AIgnitiveX',
-  description: 'Where Artificial Intelligence meets human ingenuity',
-}
+export const metadata = {
+  title: 'Marketing Page',
+  description: 'This is the marketing page of our app.',
+};
 
 const Home: NextPage = () => {
   return (
