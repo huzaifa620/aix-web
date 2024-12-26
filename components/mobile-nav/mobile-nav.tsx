@@ -14,6 +14,7 @@ import {
 import { Link } from '@saas-ui/react'
 import useRouteChanged from 'hooks/use-route-changed'
 import { usePathname } from 'next/navigation'
+import router from 'next/router'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { RemoveScroll } from 'react-remove-scroll'
 
@@ -26,6 +27,36 @@ interface NavLinkProps extends LinkProps {
   label: string
   href?: string
   isActive?: boolean
+}
+
+const handleSmoothScroll = (
+  e: React.MouseEvent<HTMLElement>,
+  id?: string,
+  href?: string,
+  onClose?: () => void, // Pass onClose as a parameter
+) => {
+  e.preventDefault()
+
+  if (id) {
+    const targetElement = document.getElementById(id)
+    if (targetElement) {
+      const headerOffset = 80 // Adjust based on your header's height
+      const elementPosition = targetElement.offsetTop
+      const offsetPosition = elementPosition - headerOffset
+
+      // Close the menu before scrolling
+      if (onClose) onClose()
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      })
+    }
+  } else if (href) {
+    // Handle router navigation
+    if (onClose) onClose() // Close the menu after navigating
+    router.push(href)
+  }
 }
 
 function NavLink({ href, children, isActive, ...rest }: NavLinkProps) {
@@ -120,7 +151,9 @@ export function MobileNavContent(props: MobileNavContentProps) {
                       <NavLink
                         href={href || `/#${id}`}
                         key={i}
-                        onClick={onClose}
+                        onClick={(e) =>
+                          handleSmoothScroll(e, id, href, onClose)
+                        }
                         {...(props as any)}
                       >
                         {label}
