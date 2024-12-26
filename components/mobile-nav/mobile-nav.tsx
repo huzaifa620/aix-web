@@ -120,6 +120,7 @@ export function MobileNavContent(props: MobileNavContentProps) {
                       <NavLink
                         href={href || `/#${id}`}
                         key={i}
+                        onClick={onClose}
                         {...(props as any)}
                       >
                         {label}
