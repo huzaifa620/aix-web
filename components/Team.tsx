@@ -6,11 +6,11 @@ import {
   IconButton,
   Image,
   Text,
-  useBreakpointValue,
   useColorModeValue,
 } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { FiGithub, FiUser, FiLinkedin } from 'react-icons/fi'
+import { useInView } from 'react-intersection-observer'
 
 const MotionBox = motion(Box)
 
@@ -21,7 +21,7 @@ interface TeamMember {
   socialLinks: {
     linkedin: string
     github: string
-    portfolio: string // Personal portfolio
+    portfolio: string
   }
 }
 
@@ -69,102 +69,110 @@ const teamMembers: TeamMember[] = [
 ]
 
 const TeamSection = () => {
-  // Use theme-aware colors for icon visibility and border color
-  const iconColor = useColorModeValue('gray.800', 'white') // Light mode: dark icons, dark mode: white icons
-  const borderColor = useColorModeValue('gray.300', 'gray.600') // Dark mode: gray.300, Light mode: gray.600
+  const iconColor = useColorModeValue('gray.800', 'white')
+  const borderColor = useColorModeValue('gray.300', 'gray.600')
 
   return (
     <Box id="team" position="relative" overflow="hidden">
       <Container maxW="container.xl" pt={{ base: 12, lg: 20 }} pb="20">
-        <MotionBox
-          p={8}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+        <Heading
+          lineHeight="short"
+          fontSize={['2xl', null, '4xl']}
+          textAlign="center"
+          mb={8}
         >
-          <Heading
-            lineHeight="short"
-            fontSize={['2xl', null, '4xl']}
-            textAlign="center"
-            mb={8}
-          >
-            Our Creative Team
-          </Heading>
-          <Text fontSize="lg" textAlign="center" mb={12}>
-            Our team combines expertise, creativity, and a shared vision to deliver outstanding solutions that drive results.
-          </Text>
-          <Flex wrap="wrap" justify="center" gap={6}>
-            {teamMembers.map((member, index) => (
-              <Box
-                key={index}
-                w={{ base: '100%', sm: '45%', md: '22%' }}
-                mb={8} // Adds spacing between the rows
-                textAlign="center"
-                position="relative"
-                boxShadow="md"
-                borderRadius="md"
-                borderWidth={1} // Border width
-                borderColor={borderColor} // Border color based on theme
-                overflow="hidden"
-                _hover={{
-                  boxShadow: 'lg', // More prominent shadow on hover
-                  transform: 'scale(1.05)', // Slightly zoom the card on hover for better visual effect
-                }}
-                transition="all 0.3s ease-in-out"
-              >
-                <Image
-                  src={member.image}
-                  alt={`${member.name}'s photo`}
-                  objectFit="cover"
-                  w="100%"
-                  h={250}
-                  transition="all 0.3s ease-in-out"
-                  _hover={{ opacity: 0.8 }}
-                />
-
-                <Box p={4}> 
-                  <Text mb={2} fontSize="xl" fontWeight="bold">
-                    {member.name}
-                  </Text>
-                  <Text mb={2} fontSize="sm">
-                    {member.role}
-                  </Text>
-                  <Flex mb={2} wrap="wrap" justify="center" gap={6}>
-                    <IconButton
-                      as="a"
-                      href={member.socialLinks.linkedin}
-                      target="_blank"
-                      aria-label="LinkedIn"
-                      icon={<FiLinkedin />}
-                      variant="ghost"
-                      color={iconColor}
-                    />
-                    <IconButton
-                      as="a"
-                      href={member.socialLinks.github}
-                      target="_blank"
-                      aria-label="GitHub"
-                      icon={<FiGithub />}
-                      variant="ghost"
-                      color={iconColor}
-                    />
-                    <IconButton
-                      as="a"
-                      href={member.socialLinks.portfolio}
-                      target="_blank"
-                      aria-label="Portfolio"
-                      icon={<FiUser  />} // Replace with an appropriate icon for personal portfolio
-                      variant="ghost"
-                      color={iconColor}
-                    />
-                  </Flex>
-                </Box>
-              </Box>
-            ))}
-          </Flex>
-        </MotionBox>
+          Our Creative Team
+        </Heading>
+        <Text fontSize="lg" textAlign="center" mb={12}>
+          Our team combines expertise, creativity, and a shared vision to deliver outstanding solutions that drive results.
+        </Text>
+        <Flex wrap="wrap" justify="center" gap={6}>
+          {teamMembers.map((member, index) => (
+            <TeamMemberCard key={index} member={member} index={index} />
+          ))}
+        </Flex>
       </Container>
     </Box>
+  )
+}
+
+const TeamMemberCard = ({ member, index }: { member: TeamMember, index: number }) => {
+  const iconColor = useColorModeValue('gray.800', 'white')
+  const borderColor = useColorModeValue('gray.300', 'gray.600')
+
+  // Using the useInView hook to trigger the animation when the element is in view
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Trigger only once
+    threshold: 0.2, // Trigger when 20% of the element is in view
+  })
+
+  return (
+    <MotionBox
+      ref={ref}
+      w={{ base: '100%', sm: '45%', md: '22%' }}
+      mb={8}
+      textAlign="center"
+      position="relative"
+      boxShadow="md"
+      borderRadius="md"
+      borderWidth={1}
+      borderColor={borderColor}
+      overflow="hidden"
+      _hover={{
+        boxShadow: 'lg',
+        transform: 'scale(1.05)',
+      }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration: 0.8, delay: index * 0.2 }}
+    >
+      <Image
+        src={member.image}
+        alt={`${member.name}'s photo`}
+        objectFit="cover"
+        w="100%"
+        h={250}
+        transition="all 0.3s ease-in-out"
+        _hover={{ opacity: 0.8 }}
+      />
+      <Box p={4}>
+        <Text mb={2} fontSize="xl" fontWeight="bold">
+          {member.name}
+        </Text>
+        <Text mb={2} fontSize="sm">
+          {member.role}
+        </Text>
+        <Flex mb={2} wrap="wrap" justify="center" gap={6}>
+          <IconButton
+            as="a"
+            href={member.socialLinks.linkedin}
+            target="_blank"
+            aria-label="LinkedIn"
+            icon={<FiLinkedin />}
+            variant="ghost"
+            color={iconColor}
+          />
+          <IconButton
+            as="a"
+            href={member.socialLinks.github}
+            target="_blank"
+            aria-label="GitHub"
+            icon={<FiGithub />}
+            variant="ghost"
+            color={iconColor}
+          />
+          <IconButton
+            as="a"
+            href={member.socialLinks.portfolio}
+            target="_blank"
+            aria-label="Portfolio"
+            icon={<FiUser />}
+            variant="ghost"
+            color={iconColor}
+          />
+        </Flex>
+      </Box>
+    </MotionBox>
   )
 }
 
