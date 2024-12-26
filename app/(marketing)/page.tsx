@@ -420,6 +420,21 @@ const AboutSection = () => {
   const bgColor = useColorModeValue('gray.700', 'gray.500') // Different background colors for light/dark mode
   const textColor = useColorModeValue('white', 'gray.100') // Light text color for dark background, dark text for light background
 
+  const { ref: titleRef, inView: titleInView } = useInView({
+    triggerOnce: true, // Trigger only once when it enters the view
+    threshold: 0.3, // Trigger when 30% of the element is in the viewport
+  })
+
+  const { ref: headingRef, inView: headingInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  })
+
+  const { ref: textRef, inView: textInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  })
+
   return (
     <Box id="about" mt={{ base: '20', md: '32' }} py={{ base: '12', md: '24' }}>
       <Flex direction={{ base: 'column', lg: 'row' }} justify="space-between">
@@ -442,8 +457,9 @@ const AboutSection = () => {
           alignItems={{ base: 'center', lg: 'flex-start' }}
         >
           <MotionBox
+            ref={titleRef}
             initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: titleInView ? 1 : 0, x: titleInView ? 0 : 100 }}
             transition={{ duration: 1 }}
             mb={4}
           >
@@ -458,8 +474,9 @@ const AboutSection = () => {
             </Text>
           </MotionBox>
           <MotionBox
+            ref={headingRef}
             initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: headingInView ? 1 : 0, x: headingInView ? 0 : 100 }}
             transition={{ duration: 1, delay: 0.1 }}
             mb={4}
           >
@@ -469,8 +486,9 @@ const AboutSection = () => {
             </Heading>
           </MotionBox>
           <MotionBox
+            ref={textRef}
             initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: textInView ? 1 : 0, x: textInView ? 0 : 100 }}
             transition={{ duration: 1, delay: 0.2 }}
             mb={6}
           >
