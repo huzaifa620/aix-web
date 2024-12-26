@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
     name: 'Hamza Ali',
     role: 'Machine Learning Engineer | Full Stack Developer',
     socialLinks: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/hamza-ali-khan-5781b0200/',
       github: '#',
       portfolio: '#',
     },
@@ -61,7 +61,7 @@ const teamMembers: TeamMember[] = [
     name: 'Muhammad Areeb',
     role: 'Full Stack Developer | Python Developer',
     socialLinks: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/muhammad-areeb-1844a5192/',
       github: '#',
       portfolio: '#',
     },
