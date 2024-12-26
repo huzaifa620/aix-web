@@ -1,6 +1,7 @@
 import {
   Box,
   BoxProps,
+  chakra,
   Container,
   Flex,
   useColorModeValue,
@@ -45,7 +46,7 @@ export const Header = (props: HeaderProps) => {
     >
       <Container maxW="container.2xl" px="8" py="4">
         <Flex width="full" align="center" justify="space-between">
-          <Logo
+          {/* <Logo
             onClick={(e) => {
               if (window.location.pathname === '/') {
                 e.preventDefault()
@@ -56,7 +57,30 @@ export const Header = (props: HeaderProps) => {
                 })
               }
             }}
-          />
+          /> */}
+          <Box
+            display="inline-block"
+            cursor={'pointer'}
+            borderRadius="md"
+            w={{ base: '80', lg: '48' }}
+            bg={useColorModeValue('transparent', 'rgba(255, 255, 255, 0.80)')}
+            onClick={(e) => {
+              if (window.location.pathname === '/') {
+                e.preventDefault()
+
+                window.scrollTo({
+                  top: 0,
+                  behavior: 'smooth',
+                })
+              }
+            }}
+          >
+            <chakra.img
+              src="/static/images/logo.png"
+              alt="Logo"
+              borderRadius="lg"
+            />
+          </Box>
           <Navigation />
         </Flex>
       </Container>

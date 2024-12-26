@@ -31,9 +31,9 @@ const teamMembers: TeamMember[] = [
     name: 'Owais Ahmed',
     role: 'Machine Learning Engineer | Computer Vision Engineer',
     socialLinks: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/owais-ahmed-749911192',
       github: '#',
-      portfolio: '#',
+      portfolio: 'https://owais142002.github.io/',
     },
   },
   {

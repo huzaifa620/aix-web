@@ -7,6 +7,7 @@ import {
   Link,
   Text,
   VStack,
+  chakra,
   useColorModeValue,
 } from '@chakra-ui/react'
 import router from 'next/router'
@@ -204,15 +205,42 @@ const Footer = () => {
           transition={{ duration: 0.8 }}
         >
           <Flex
-            mt={{ base: '10', lg: '10' }}
-            ml={{ base: '0', lg: '16' }}
+            mt={10}
             direction={{ base: 'column', lg: 'row' }}
             gap={8}
             align="center"
             justify="space-between"
           >
             <HStack spacing={4}>
-              <Box transform={{ base: "scale(1.5)", lg: "scale(2)" }}>
+              <Box
+                display="inline-block"
+                cursor={'pointer'}
+                px={2}
+                pt={2}
+                pb={1}
+                mt={-2}
+                borderRadius="md"
+                w={{ base: '80', lg: 'xl' }}
+                bg={useColorModeValue('transparent', 'transparent')}
+                backdropFilter="blur(5px)"
+                onClick={(e) => {
+                  if (window.location.pathname === '/') {
+                    e.preventDefault()
+
+                    window.scrollTo({
+                      top: 0,
+                      behavior: 'smooth',
+                    })
+                  }
+                }}
+              >
+                <chakra.img
+                  src="/static/images/logo.jpg"
+                  alt="Logo"
+                  borderRadius="lg"
+                />
+              </Box>
+              {/* <Box transform={{ base: "scale(1.5)", lg: "scale(2)" }}>
                 <Logo
                   onClick={(e) => {
                     if (window.location.pathname === '/') {
@@ -225,7 +253,7 @@ const Footer = () => {
                     }
                   }}
                 />
-              </Box>
+              </Box> */}
             </HStack>
             <Text fontSize="sm" opacity={0.7}>
               © AIgnitiveX™, {new Date().getFullYear()}. All rights reserved.
