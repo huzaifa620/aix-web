@@ -82,11 +82,6 @@ export const HighlightsTestimonialItem: React.FC<
           </Box>
         }
         avatar={avatar}
-        border="0"
-        bg="transparent"
-        boxShadow="none"
-        color="white"
-        position="relative"
       >
         {children}
       </Testimonial>
