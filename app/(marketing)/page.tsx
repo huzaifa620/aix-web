@@ -451,7 +451,7 @@ const AboutSection = () => {
               fontSize="2xl"
               fontWeight="semibold"
               textTransform="uppercase"
-              color={useColorModeValue('teal.600', 'green.300')}
+              color={useColorModeValue('teal.300', 'green.300')}
               mb={2}
             >
               About Us
@@ -483,7 +483,7 @@ const AboutSection = () => {
             </Text>
             <Text
               fontSize="lg"
-              color={useColorModeValue('teal.600', 'green.300')}
+              color={useColorModeValue('teal.300', 'green.300')}
               mb={6}
             >
               “Unlocking the potential of data to drive smarter decisions and
