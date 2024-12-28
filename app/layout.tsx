@@ -1,9 +1,9 @@
-import { ColorModeScript, theme } from '@chakra-ui/react'
+import { ColorModeScript, theme } from '@chakra-ui/react';
 
-import { Provider } from './provider'
+import { Provider } from './provider';
 
 export default function Layout(props: { children: React.ReactNode }) {
-  const colorMode = theme.config.initialColorMode
+  const colorMode = theme.config.initialColorMode;
 
   return (
     <html lang="en" data-theme={colorMode} style={{ colorScheme: colorMode }}>
@@ -43,11 +43,36 @@ export default function Layout(props: { children: React.ReactNode }) {
           href="/static/favicons/symbol.jpg"
         />
         <link rel="manifest" href="/static/favicons/manifest.json" />
+
+        {/* Scrollbar Styling */}
+        <style>
+          {`
+            /* For WebKit browsers (Chrome, Safari, etc.) */
+            body::-webkit-scrollbar {
+              width: 8px; /* Width of the scrollbar */
+            }
+            body::-webkit-scrollbar-thumb {
+              background-color: green; /* Color of the scrollbar thumb */
+              border-radius: 10px; /* Rounded corners */
+            }
+            body::-webkit-scrollbar-track {
+              background-color: #f1f1f1; /* Track color */
+            }
+
+            /* For Firefox */
+            html {
+              scrollbar-width: thin; /* Thin scrollbar */
+              scrollbar-color: green #f1f1f1; /* Thumb and track colors */
+            }
+
+            /* For Edge and IE (optional; uses WebKit styles in newer versions) */
+          `}
+        </style>
       </head>
       <body className={`chakra-ui-${colorMode}`}>
         <ColorModeScript initialColorMode={colorMode} />
         <Provider>{props.children}</Provider>
       </body>
     </html>
-  )
+  );
 }
