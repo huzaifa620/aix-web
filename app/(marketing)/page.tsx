@@ -71,11 +71,6 @@ import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
 
-// export const meta: Metadata = {
-//   title: 'AIgnitiveX',
-//   description: 'Where Artificial Intelligence meets human ingenuity',
-// }
-
 const handleSmoothScroll = (
   e: React.MouseEvent<HTMLElement>,
   id?: string,
