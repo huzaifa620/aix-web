@@ -31,6 +31,11 @@ const siteConfig = {
         href: '',
       },
       {
+        id: 'projects',
+        label: 'Projects',
+        href: '',
+      },
+      {
         id: 'team',
         label: 'Team',
         href: '',

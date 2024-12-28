@@ -48,7 +48,6 @@ import { useInView } from 'react-intersection-observer'
 import * as React from 'react'
 import { useEffect } from 'react'
 
-import ClientsSection from '#components/Clients'
 import ContactUsSection from '#components/ContactUs'
 import Footer from '#components/Footer'
 import TeamSection from '#components/Team'
@@ -70,6 +69,8 @@ import { Em } from '#components/typography'
 import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
+import ProjectsSection from '#components/Projects'
+import ClientsSection from '#components/Clients'
 
 const handleSmoothScroll = (
   e: React.MouseEvent<HTMLElement>,
@@ -106,9 +107,11 @@ const Home: NextPage = () => {
 
       <AboutSection />
 
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
 
       <ClientsSection />
+
+      <ProjectsSection />
 
       <TestimonialsSection />
 
