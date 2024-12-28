@@ -6,8 +6,9 @@ import {
   SimpleGrid,
   Text,
   useColorMode,
-} from '@chakra-ui/react'
-import { motion } from 'framer-motion'
+} from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const ClientsSection = () => {
   const logos = [
@@ -19,9 +20,10 @@ const ClientsSection = () => {
     '/static/images/client6-logo.png',
     'https://prices.vn/frontend/v2/images/logo.svg',
     '/static/images/client8-logo.png',
-  ]
+  ];
 
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
+  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true }); // Ensures animation triggers only once
 
   return (
     <Box
@@ -29,9 +31,9 @@ const ClientsSection = () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      w={'full'}
+      w="full"
     >
-      <Container maxW="container.xl" pt="12" pb="20">
+      <Container ref={ref} maxW="container.xl" pt="12" pb="20">
         <Heading
           lineHeight="short"
           fontSize={['2xl', '3xl', '4xl']}
@@ -55,10 +57,14 @@ const ClientsSection = () => {
           {logos.map((logo, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }} // Starting state
-              animate={{ opacity: 1, y: 0 }} // End state (fade in and move up)
+              initial={{ opacity: 0, y: 50 }}
+              animate={
+                inView
+                  ? { opacity: 1, y: 0 } // Fade in and move up
+                  : { opacity: 0, y: 50 } // Reset (if needed)
+              }
               transition={{
-                delay: index * 0.1, // Staggered animation for each logo
+                delay: index * 0.1, // Staggered animation
                 type: 'spring',
                 stiffness: 100,
                 damping: 25,
@@ -72,15 +78,17 @@ const ClientsSection = () => {
                 height={['80px', '100px', '120px']}
                 width={['120px', '160px', '200px']}
                 maxWidth="200px"
+                rounded="lg"
+                p={2}
               >
                 <Image
                   src={logo}
+                  alt={`Client Logo ${index + 1}`}
                   bg={index === 2 && colorMode === 'light' ? 'gray.800' : 'transparent'}
                   rounded={'lg'}
                   cursor={'pointer'}
-                  alt={`Client Logo ${index + 1}`}
-                  width={'100%'}
-                  objectFit="cover"
+                  width="100%"
+                  objectFit="contain"
                 />
               </Box>
             </motion.div>
@@ -88,7 +96,7 @@ const ClientsSection = () => {
         </SimpleGrid>
       </Container>
     </Box>
-  )
-}
+  );
+};
 
-export default ClientsSection
+export default ClientsSection;
