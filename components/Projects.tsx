@@ -30,7 +30,7 @@ interface Project {
 const projects: Project[] = [
   {
     logo: '/static/images/client1-logo.png',
-    cover: '/static/images/anf.png',
+    cover: '/static/images/rehani.png',
     companyName: 'Rehani Soko',
     website: 'https://www.rehanisoko.com',
     companyType: 'Prop-Tech Company',
@@ -46,15 +46,15 @@ const projects: Project[] = [
   },
   {
     logo: '/static/images/client3-logo.png',
-    cover: '/static/images/anf.png',
+    cover: '/static/images/monarca.png',
     companyName: 'Monarca Jewels',
-    website: 'https://www.healthco.com',
+    website: 'https://www.monarcajewels.com/',
     companyType: 'Online Jewelery Store',
     details: 'Revolutionizing healthcare with AI-driven platforms.',
   },
   {
     logo: '/static/images/client4-logo.png',
-    cover: '/static/images/anf.png',
+    cover: '/static/images/lovum.png',
     companyName: 'Lovum Groups',
     website: 'https://lovumgroup.com',
     companyType: 'Consultation Organization',
@@ -76,6 +76,22 @@ const projects: Project[] = [
     companyType: 'Home Protection',
     details: 'Revolutionizing healthcare with AI-driven platforms.',
   },
+  {
+    logo: '/static/images/client8-logo.png',
+    cover: '/static/images/eduessentials.png',
+    companyName: 'EduEssentials',
+    website: 'https://edu-essentials.vercel.app/',
+    companyType: 'Educational Platform',
+    details: 'Empowering students and educators with intuitive academic tools.',
+  },
+  {
+    logo: '/static/images/client9-logo.png',
+    cover: '/static/images/baggins.png',
+    companyName: 'FireBaggins',
+    website: 'https://baggin-erenyea.vercel.app/',
+    companyType: 'Event Management',
+    details: 'Empowering students and educators with intuitive academic tools.',
+  }
 ]
 
 const ProjectsSection = () => {

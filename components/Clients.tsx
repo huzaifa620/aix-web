@@ -17,7 +17,7 @@ const ClientsSection = () => {
     '/static/images/client4-logo.png',
     '/static/images/client5-logo.png',
     '/static/images/client6-logo.png',
-    '/static/images/client7-logo.png',
+    'https://prices.vn/frontend/v2/images/logo.svg',
     '/static/images/client8-logo.png',
   ]
 
@@ -75,6 +75,9 @@ const ClientsSection = () => {
               >
                 <Image
                   src={logo}
+                  bg={index === 2 && colorMode === 'light' ? 'gray.800' : 'transparent'}
+                  rounded={'lg'}
+                  cursor={'pointer'}
                   alt={`Client Logo ${index + 1}`}
                   width={'100%'}
                   objectFit="cover"
