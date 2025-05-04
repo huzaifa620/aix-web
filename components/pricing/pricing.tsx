@@ -14,7 +14,7 @@ import React from 'react'
 
 import {
   ButtonLink,
-  ButtonLinkProps,
+  // ButtonLinkProps,
 } from '#components/button-link/button-link'
 import { BackgroundGradient } from '#components/gradients/background-gradient'
 import { Section, SectionProps, SectionTitle } from '#components/section'
@@ -25,7 +25,7 @@ export interface PricingPlan {
   description: React.ReactNode
   price: React.ReactNode
   features: Array<PricingFeatureProps | null>
-  action: ButtonLinkProps & { label?: string }
+  // action: ButtonLinkProps & { label?: string }
   isRecommended?: boolean
 }
 
@@ -71,9 +71,9 @@ export const Pricing: React.FC<PricingProps> = (props) => {
                   ),
                 )}
               </PricingFeatures>
-              <ButtonLink colorScheme="primary" {...plan.action}>
+              {/* <ButtonLink colorScheme="primary" {...plan.action}>
                 {plan.action.label || 'Sign Up'}
-              </ButtonLink>
+              </ButtonLink> */}
             </PricingBox>
           ))}
         </SimpleGrid>
