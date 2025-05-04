@@ -1,9 +1,11 @@
 'use client'
 
 import {
+  Badge,
   Box,
   Button,
   ButtonGroup,
+  Center,
   Container,
   Flex,
   Grid,
@@ -11,6 +13,7 @@ import {
   Heading,
   Icon,
   IconButton,
+  SimpleGrid,
   Stack,
   Tag,
   Text,
@@ -29,13 +32,18 @@ import {
   FiArrowRight,
   FiBox,
   FiCheck,
+  FiCloud,
   FiCode,
   FiCopy,
+  FiCpu,
+  FiDatabase,
   FiFlag,
+  FiGlobe,
   FiGrid,
   FiLock,
   FiSearch,
   FiSliders,
+  FiSmartphone,
   FiSmile,
   FiTerminal,
   FiThumbsUp,
@@ -48,8 +56,10 @@ import { useInView } from 'react-intersection-observer'
 import * as React from 'react'
 import { useEffect } from 'react'
 
+import ClientsSection from '#components/Clients'
 import ContactUsSection from '#components/ContactUs'
 import Footer from '#components/Footer'
+import ProjectsSection from '#components/Projects'
 import TeamSection from '#components/Team'
 import { ButtonLink } from '#components/button-link/button-link'
 import { Faq } from '#components/faq'
@@ -69,8 +79,6 @@ import { Em } from '#components/typography'
 import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
-import ProjectsSection from '#components/Projects'
-import ClientsSection from '#components/Clients'
 
 const handleSmoothScroll = (
   e: React.MouseEvent<HTMLElement>,
@@ -259,13 +267,16 @@ const MotionBox = motion(Box) // Wrap Chakra's Box with motion
 
 const ServicesSection = () => {
   const { colorMode } = useColorMode()
+  const cardBg = useColorModeValue('white', 'gray.800')
+  const hoverBg = useColorModeValue('gray.50', 'gray.700')
+  const accentColor = useColorModeValue('blue.500', 'blue.300')
 
   const services = [
     {
       title: 'Web Development',
+      icon: <FiGlobe size={24} />,
       description:
-        'We provide responsive and modern websites, tailored to meet your business needs and user expectations. Our expertise includes popular frameworks and libraries that will make your project stand out.',
-      image: '/static/images/web.jpg',
+        'Custom, responsive websites with modern frameworks for optimal performance and user experience.',
       techs: [
         'React',
         'Next.js',
@@ -279,24 +290,43 @@ const ServicesSection = () => {
         'GraphQL',
         'Express.js',
       ],
+      gradient: 'linear(to-br, blue.400, purple.500)',
     },
     {
-      title: 'Artificial Intelligence',
+      title: 'AI Solutions',
+      icon: <FiCpu size={24} />,
       description:
-        'Leverage AI to enhance your business operations, from machine learning to natural language processing.',
-      image: '/static/images/ai.png',
+        'Intelligent systems leveraging machine learning and natural language processing.',
       techs: [
-        'Demand Forecasting',
-        'Optimization Algorithms',
-        'Computer Vision',
         'LLMs',
+        'Optimization Algorithms',
+        'Demand Forecasting',
+        'Computer Vision',
       ],
+      gradient: 'linear(to-br, teal.400, green.500)',
     },
     {
-      title: 'Cloud And DevOps',
+      title: 'Data Extraction',
+      icon: <FiDatabase size={24} />,
       description:
-        'Build scalable, reliable, and efficient cloud infrastructure with DevOps best practices.',
-      image: '/static/images/devops.png',
+        'Automated collection and structuring of web data for business intelligence.',
+      techs: [
+        'Scrapy',
+        'BeautifulSoup',
+        'Selenium',
+        'Puppeteer',
+        'import.io',
+        'Proxy Rotation',
+        'CAPTCHA Solving',
+        'Data Cleaning',
+      ],
+      gradient: 'linear(to-br, orange.400, red.500)',
+    },
+    {
+      title: 'Cloud & DevOps',
+      icon: <FiCloud size={24} />,
+      description:
+        'Scalable cloud infrastructure with CI/CD pipelines and automation.',
       techs: [
         'AWS',
         'Azure',
@@ -306,42 +336,109 @@ const ServicesSection = () => {
         'CI/CD',
         'GCP',
       ],
+      gradient: 'linear(to-br, purple.400, pink.500)',
     },
     {
       title: 'Mobile Apps',
+      icon: <FiSmartphone size={24} />,
       description:
-        'Create intuitive and high-performance mobile applications for iOS and Android platforms.',
-      image: '/static/images/mobile-app.jpg',
+        'Cross-platform mobile applications with native performance.',
       techs: ['React Native', 'Flutter', 'Android Studio'],
+      gradient: 'linear(to-br, green.400, blue.500)',
     },
   ]
 
   return (
-    <Container id="services" maxW="container.xl">
-      <Box p={4}>
-        <Grid
-          templateColumns={{
-            base: '1fr',
-            sm: '1fr',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(2, 1fr)',
-          }}
-          gap={8}
-        >
+    <Box id="services" py={20} position="relative">
+      <Container maxW="7xl">
+        <Box textAlign="center" mb={16}>
+          <Heading
+            lineHeight="short"
+            fontSize={['2xl', '3xl', '4xl']}
+            textAlign="center"
+            mb={8}
+          >
+            Our Services
+          </Heading>
+          <Text
+            maxW="2xl"
+            mx="auto"
+            color={useColorModeValue('gray.600', 'gray.300')}
+          >
+            Comprehensive digital solutions tailored to your business needs
+          </Text>
+        </Box>
+
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
           {services.map((service, index) => (
-            <AnimatedCard
+            <Box
               key={index}
-              service={service}
-              direction={index % 2 === 0 ? 'left' : 'right'} // Alternate animation directions
-              colorMode={colorMode}
-            />
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              bg={cardBg}
+              rounded="xl"
+              overflow="hidden"
+              shadow="lg"
+              borderWidth="1px"
+              borderColor={useColorModeValue('gray.100', 'gray.700')}
+              _hover={{
+                transform: 'translateY(-5px)',
+                shadow: 'xl',
+                borderColor: accentColor,
+              }}
+            >
+              <Box h="8px" bgGradient={service.gradient} />
+              <Box p={6}>
+                <Flex align="center" mb={4}>
+                  <Center
+                    w={12}
+                    h={12}
+                    rounded="lg"
+                    bg={useColorModeValue(
+                      `${service.gradient.split('.')[0]}.50`,
+                      'gray.700',
+                    )}
+                    color={accentColor}
+                    mr={4}
+                  >
+                    {service.icon}
+                  </Center>
+                  <Text fontSize="xl" fontWeight="bold">
+                    {service.title}
+                  </Text>
+                </Flex>
+
+                <Text mb={5} color={useColorModeValue('gray.600', 'gray.300')}>
+                  {service.description}
+                </Text>
+
+                <Flex wrap="wrap" gap={2}>
+                  {service.techs.map((tech, i) => (
+                    <Badge
+                      key={i}
+                      textTransform="none"
+                      px={2}
+                      py={1}
+                      bg={useColorModeValue('gray.100', 'gray.700')}
+                      color={useColorModeValue('gray.700', 'gray.200')}
+                      rounded="full"
+                      fontSize="xs"
+                      fontWeight="medium"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </Flex>
+              </Box>
+            </Box>
           ))}
-        </Grid>
-      </Box>
-    </Container>
+        </SimpleGrid>
+      </Container>
+    </Box>
   )
 }
-
 // Animated card component
 const AnimatedCard = ({ service, direction, colorMode }) => {
   const controls = useAnimation()
@@ -474,7 +571,10 @@ const AboutSection = () => {
           <MotionBox
             ref={headingRef}
             initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: headingInView ? 1 : 0, x: headingInView ? 0 : 100 }}
+            animate={{
+              opacity: headingInView ? 1 : 0,
+              x: headingInView ? 0 : 100,
+            }}
             transition={{ duration: 1, delay: 0.1 }}
             mb={4}
           >

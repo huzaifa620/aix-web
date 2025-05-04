@@ -1,16 +1,27 @@
 import { Button, ButtonProps } from '@chakra-ui/react'
-import NextLink, { LinkProps } from 'next/link'
+import NextLink from 'next/link'
+import { forwardRef } from 'react'
 
-export type ButtonLinkProps = LinkProps & ButtonProps
-
-export const ButtonLink: React.FC<ButtonLinkProps> = ({
-  href,
-  children,
-  ...props
-}) => {
-  return (
-    <NextLink href={href} passHref>
-      <Button {...props}>{children}</Button>
-    </NextLink>
-  )
+interface ButtonLinkProps extends ButtonProps {
+  href: string
+  target?: string
+  rel?: string
 }
+
+export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
+  ({ href, target, rel, ...props }, ref) => {
+    return (
+      <NextLink href={href} passHref legacyBehavior>
+        <Button
+          ref={ref}
+          as="a"
+          target={target}
+          rel={rel || target === '_blank' ? 'noopener noreferrer' : undefined}
+          {...props}
+        />
+      </NextLink>
+    )
+  }
+)
+
+ButtonLink.displayName = 'ButtonLink'

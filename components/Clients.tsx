@@ -14,7 +14,7 @@ const ClientsSection = () => {
   const logos = [
     '/static/images/client1-logo.png',
     '/static/images/client2-logo.png',
-    '/static/images/client3-logo.png',
+    '/static/images/client10-logo.png',
     '/static/images/client4-logo.png',
     '/static/images/client5-logo.png',
     '/static/images/client6-logo.png',
