@@ -26,16 +26,16 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  // {
-  //   image: '/static/images/team1.png',
-  //   name: 'Owais Ahmed',
-  //   role: 'Machine Learning Engineer | Computer Vision Engineer',
-  //   socialLinks: {
-  //     linkedin: 'https://www.linkedin.com/in/owais-ahmed-749911192',
-  //     github: '#',
-  //     portfolio: 'https://owais142002.github.io/',
-  //   },
-  // },
+  {
+    image: '/static/images/team1.png',
+    name: 'Owais Ahmed',
+    role: 'Machine Learning Engineer | Computer Vision Engineer',
+    socialLinks: {
+      linkedin: 'https://www.linkedin.com/in/owais-ahmed-749911192',
+      github: '#',
+      portfolio: 'https://owais142002.github.io/',
+    },
+  },
   {
     image: '/static/images/team2.png',
     name: 'Hamza Ali',
