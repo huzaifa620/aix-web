@@ -37,13 +37,23 @@ const teamMembers: TeamMember[] = [
   //   },
   // },
   {
+    image: '/static/images/team1_1.png',
+    name: 'Anas Ahmed',
+    role: 'DevOps & SRE Engineer | Python Developer',
+    socialLinks: {
+      linkedin: 'http://www.linkedin.com/in/anas-ahmed304',
+      github: 'https://github.com/anasahmedde',
+      portfolio: '#',
+    },
+  },
+  {
     image: '/static/images/team2.png',
     name: 'Hamza Ali',
     role: 'Machine Learning Engineer | Full Stack Developer',
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/hamza-ali-khan-5781b0200/',
-      github: '#',
-      portfolio: '#',
+      github: 'https://github.com/erenyea',
+      portfolio: 'https://erenyea.github.io/',
     },
   },
   {
@@ -53,7 +63,7 @@ const teamMembers: TeamMember[] = [
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/muhammad-huzaifa-2a3821249',
       github: 'https://github.com/huzaifa620',
-      portfolio: 'https://personal-portfolio-eta-three.vercel.app',
+      portfolio: 'https://huzaifa620.github.io/',
     },
   },
   {
